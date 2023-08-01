@@ -42,4 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function notas(){
+        return $this->hasMany('App/Models/notas', 'user_id');
+    }
 }
