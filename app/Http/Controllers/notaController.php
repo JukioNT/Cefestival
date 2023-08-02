@@ -31,8 +31,24 @@ class notaController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new nota();
         $dados = $request->input('notas');
+        $dados = str_replace('.,', ' ', $dados);
+        $valores = explode(" ", $dados);
+        $arrayFinal = [];
+        foreach ($valores as $valor) {
+            list($parte1, $parte2) = explode(",", $valor);
+            $arrayFinal[] = [(int)$parte1, (int)$parte2];
+        }
+        $dados = $arrayFinal;
+
+        foreach($dados as $item){
+            $data = new nota();
+            $data->user_id = 1;
+            $data->apresentacao_id = $item[1];
+            $data->nota = $item[0];
+            $data->save();
+        }
+
         return view('sistema.enviaNotas', compact('dados'));
     }
 

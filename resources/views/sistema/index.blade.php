@@ -6,13 +6,13 @@
                 <div class="card-header d-flex justify-content-center" id="headingOne">
                     <h5 class="mb-0 d-flex justify-content-center">
                         <button class="btn btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne" onclick="Mudarestado('{{ $value['id'] }}')">
+                            aria-expanded="true" aria-controls="collapseOne" onclick="Mudarestado('{{ $value['tipo'] }}')">
                             <h4>{{ $value['tipo'] }}</h4>
                         </button>
                     </h5>
                 </div>
 
-                <div id="{{ $value['id'] }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="{{ $value['tipo'] }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                         <form action="{{route('enviaNota')}}" method="post" id="{{ $value['tipo'] }}">
                             <table>
@@ -32,23 +32,23 @@
                                         <td>Apresentação {{ $apresentacao['numero'] }}</td>
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
                                                 name="categoria1"
-                                                size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
+                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
                                         </td> 
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
                                                 name="categoria2"
-                                                size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
+                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
                                         </td>
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
                                                 name="categoria3"
-                                                size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
+                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
                                         </td>
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
                                                 name="categoria4"
-                                                size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
+                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
                                         </td>
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
                                                 name="categoria5"
-                                                size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
+                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
                                         </td>
                                         <td>
                                             <p><span id="{{$apresentacao['numero']}}sum">0</span></p>
