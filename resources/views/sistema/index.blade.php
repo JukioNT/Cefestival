@@ -2,26 +2,46 @@
 @section('body')
 
 @foreach ($categorias as $item => $value)
-<div id="accordion">
+<div class="vstack gap-5 p-4" id="accordion">
     <div class="card">
-        <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-                <button class="btn btn-link btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne" aria-expanded="true"
+        <div class="card-header d-flex justify-content-center" id="headingOne">
+            <h5 class="mb-0 d-flex justify-content-center">
+                <button class="btn btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne" aria-expanded="true"
                     aria-controls="collapseOne" onclick="Mudarestado('{{$value['id']}}')">
-                    {{$value['tipo']}}
+                    <h4>{{$value['tipo']}}</h4>
                 </button>
             </h5>
         </div>
 
         <div id="{{$value['id']}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                labore sustainable VHS.
+                <form action="submit-vote.php" method="post">
+                    <table>
+                      <tr>
+                        <th>Apresentação</th>
+                        <th>{{$value['categoria1']}}</th>
+                        <th>{{$value['categoria2']}}</th>
+                        <th>{{$value['categoria3']}}</th>
+                        <th>{{$value['categoria4']}}</th>
+                        <th>Total</th>
+                      </tr>
+                      @foreach($apresentacoes as $item => $apresentacao)
+                        <tr>
+                            @if($value['id'] == $apresentacao['categoria_id'])
+                            <tr>
+                                <td>Apresentação {{$apresentacao['numero']}}</td>
+                                <td><input type="number" name="{{$value['tipo'].'categoria1'.$apresentacao['categoria_id']}}" size="3"></td>
+                                <td><input type="number" name="{{$value['tipo'].'categoria2'.$apresentacao['categoria_id']}}" size="3"></td>
+                                <td><input type="number" name="{{$value['tipo'].'categoria3'.$apresentacao['categoria_id']}}" size="3"></td>
+                                <td><input type="number" name="{{$value['tipo'].'categoria4'.$apresentacao['categoria_id']}}" size="3"></td>
+                            </tr>
+                            @endif
+                        </tr>
+                      @endforeach
+                    </table>
+                    <br><br>
+                    <input type="submit" value="Enviar Voto">
+                  </form>
             </div>
         </div>
     </div>

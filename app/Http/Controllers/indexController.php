@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\categorias;
+use App\Models\apresentacoes;
 
 class indexController extends Controller
 {
@@ -16,7 +17,8 @@ class indexController extends Controller
     public function index()
     {
         $categorias = categorias::all();
-        return view('sistema.index', compact('categorias'));
+        $apresentacoes = apresentacoes::all();
+        return view('sistema.index', compact('categorias', 'apresentacoes'));
 
     }
 
