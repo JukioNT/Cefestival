@@ -113,38 +113,6 @@
                     sum+=Number(elements[i].value)
                 }else{
                     if(fisrt == true){
-                        sums.push(sum.toString().concat(",").concat(elements[i-1].id));
-                        console.log(elements[i].id)
-                        qtd = 1
-                        sum = 0
-                        sum+=Number(elements[i].value)
-                    }
-                }
-
-                console.log(elements[i].value)
-
-                qtd += 1
-            }
-            sums.push(sum.toString().concat(",").concat(elements[elements.length-1].id));
-            console.log(sums)
-        }
-
-        function enviarForms(){
-            const elements = document.querySelectorAll("input[type='number']")
-            console.log(elements)
-            var sum = 0
-            var sums = []
-            var qtd = 1
-            fisrt = true;
-            for(var i = 0; i < elements.length; i++){
-                if(elements[i].value == ""){
-                    elements[i].value = 0
-                }
-
-                if(qtd <= 5){
-                    sum+=Number(elements[i].value)
-                }else{
-                    if(fisrt == true){
                         sums.push(sum.toString().concat(",").concat(elements[i-1].id).concat("."));
                         console.log(elements[i].id)
                         qtd = 1
