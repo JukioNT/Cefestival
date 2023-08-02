@@ -14,7 +14,7 @@
 
                 <div id="{{ $value['id'] }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        <form action="submit-vote.php" method="post">
+                        <form action="{{route('enviaNota')}}" method="post" id="{{ $value['tipo'] }}">
                             <table>
                                 <tr>
                                     <th>Apresentação</th>
@@ -31,41 +31,48 @@
                                     <tr>
                                         <td>Apresentação {{ $apresentacao['numero'] }}</td>
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="{{ $value['tipo'] . 'categoria1' . $apresentacao['categoria_id'] }}"
+                                                name="categoria1"
                                                 size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
                                         </td> 
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="{{ $value['tipo'] . 'categoria2' . $apresentacao['categoria_id'] }}"
+                                                name="categoria2"
                                                 size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
                                         </td>
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="{{ $value['tipo'] . 'categoria3' . $apresentacao['categoria_id'] }}"
-                                                size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
-                                        </td>
-                                        <td><input type="number " OnInput="SumNotes(this.id)" required
-                                                name="{{ $value['tipo'] . 'categoria4' . $apresentacao['categoria_id'] }}"
+                                                name="categoria3"
                                                 size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
                                         </td>
                                         <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="{{ $value['tipo'] . 'categoria5' . $apresentacao['categoria_id'] }}"
+                                                name="categoria4"
+                                                size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
+                                        </td>
+                                        <td><input type="number" OnInput="SumNotes(this.id)" required
+                                                name="categoria5"
                                                 size="3" class="{{$apresentacao['numero']}}" id="{{$apresentacao['numero']}}">
                                         </td>
                                         <td>
                                             <p><span id="{{$apresentacao['numero']}}sum">0</span></p>
                                         </td>
+                                        
                                     </tr>
                                 @endif
                                 </tr>
                                 @endforeach
                             </table>
                             <br><br>
-                            <input type="submit" value="Enviar Voto">
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
+    <input type="submit" value="Enviar Voto" onclick="enviarForms()">
+    <form id="hiddenform" action="{{route('enviaNota')}}" method="post">
+        @csrf
+        <input type="hidden" id="hidden" name="notas">
+        <input type="submit" value="Enviar Voto">
+    </form>
+    
 @endsection
 @section('script')
     <script>
@@ -76,6 +83,7 @@
             else
                 document.getElementById(collapseOne).style.display = 'block';
         }
+
         function SumNotes(id) {
             const number = id
             const elements = document.getElementsByClassName(id)
@@ -86,8 +94,75 @@
                 }
                 sum += Number(elements[i].value)
             }
-            console.log("#"+id+"sum")
             $("#"+id+"sum").text(sum)
+        }
+
+        function enviarForms(){
+            const elements = document.querySelectorAll("input[type='number']")
+            console.log(elements)
+            var sum = 0
+            var sums = []
+            var qtd = 1
+            fisrt = true;
+            for(var i = 0; i < elements.length; i++){
+                if(elements[i].value == ""){
+                    elements[i].value = 0
+                }
+
+                if(qtd <= 5){
+                    sum+=Number(elements[i].value)
+                }else{
+                    if(fisrt == true){
+                        sums.push(sum.toString().concat(",").concat(elements[i-1].id));
+                        console.log(elements[i].id)
+                        qtd = 1
+                        sum = 0
+                        sum+=Number(elements[i].value)
+                    }
+                }
+
+                console.log(elements[i].value)
+
+                qtd += 1
+            }
+            sums.push(sum.toString().concat(",").concat(elements[elements.length-1].id));
+            console.log(sums)
+        }
+
+        function enviarForms(){
+            const elements = document.querySelectorAll("input[type='number']")
+            console.log(elements)
+            var sum = 0
+            var sums = []
+            var qtd = 1
+            fisrt = true;
+            for(var i = 0; i < elements.length; i++){
+                if(elements[i].value == ""){
+                    elements[i].value = 0
+                }
+
+                if(qtd <= 5){
+                    sum+=Number(elements[i].value)
+                }else{
+                    if(fisrt == true){
+                        sums.push(sum.toString().concat(",").concat(elements[i-1].id).concat("."));
+                        console.log(elements[i].id)
+                        qtd = 1
+                        sum = 0
+                        sum+=Number(elements[i].value)
+                    }
+                }
+
+                console.log(elements[i].value)
+
+                qtd += 1
+            }
+            sums.push(sum.toString().concat(",").concat(elements[elements.length-1].id));
+            var form = document.getElementById("hidden")
+            form.value = sums
+            console.log(form)
+            var form = document.getElementById("hiddenform")
+            console.log(form)
         }
     </script>
 @endsection

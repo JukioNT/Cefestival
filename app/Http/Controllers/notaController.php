@@ -3,22 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\notas;
+use App\Models\nota;
 
 class notaController extends Controller
 {
     private $notas;
     
-    public function __construct(notas $nota){
-        $this->middleware('auth');
-        $this->notas = $nota;
-    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $notas = notas::all();
+        $notas = nota::all();
         return view('sistema.index', compact('notas'));
     }
 
@@ -35,7 +31,9 @@ class notaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new nota();
+        $dados = $request->input('notas');
+        return view('sistema.enviaNotas', compact('dados'));
     }
 
     /**

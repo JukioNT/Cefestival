@@ -18,3 +18,4 @@ Route::get('/', [App\Http\Controllers\indexController::class, 'index']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/home/notas', [App\Http\Controllers\notaController::class, 'store'])->name('enviaNota');
