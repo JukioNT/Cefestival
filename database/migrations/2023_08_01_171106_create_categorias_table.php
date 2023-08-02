@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('categoria2');
             $table->string('categoria3');
             $table->string('categoria4');
+            $table->string('categoria5');
             $table->timestamps();
         });
     }
