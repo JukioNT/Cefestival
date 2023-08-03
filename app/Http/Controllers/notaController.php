@@ -32,6 +32,8 @@ class notaController extends Controller
     public function store(Request $request)
     {
         $dados = $request->input('notas');
+        $userid = substr($dados, -1);
+        $dados = substr($dados, 0, -1);
         $dados = str_replace('.,', ' ', $dados);
         $valores = explode(" ", $dados);
         $arrayFinal = [];
@@ -43,7 +45,7 @@ class notaController extends Controller
 
         foreach($dados as $item){
             $data = new nota();
-            $data->user_id = 1;
+            $data->user_id = $userid;
             $data->apresentacao_id = $item[1];
             $data->nota = $item[0];
             $data->save();

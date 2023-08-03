@@ -118,6 +118,7 @@
     <form id="hiddenform" action="{{route('enviaNota')}}" method="post">
         @csrf
         <input type="hidden" id="hidden" name="notas">
+        <input type="hidden" id="userid" value="{{$user->id}}">
         <input type="submit" value="Enviar Voto">
     </form>
     
@@ -147,7 +148,7 @@
 
         function enviarForms(){
             const elements = document.querySelectorAll("input[type='number']")
-            console.log(elements)
+            //console.log(elements)
             var sum = 0
             var sums = []
             var qtd = 1
@@ -157,7 +158,9 @@
                     elements[i].value = 0
                 }
 
-                if(qtd <= 5){
+                console.log("-")
+                console.log(qtd)
+                if(qtd < 5){
                     sum+=Number(elements[i].value)
                 }else{
                     if(fisrt == true){
@@ -170,10 +173,11 @@
                 }
 
                 console.log(elements[i].value)
-
                 qtd += 1
             }
             sums.push(sum.toString().concat(",").concat(elements[elements.length-1].id));
+            const userid = document.getElementById("userid")
+            sums.push(userid.value)
             var form = document.getElementById("hidden")
             form.value = sums
             console.log(form)
