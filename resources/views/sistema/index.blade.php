@@ -3,57 +3,105 @@
     @foreach ($categorias as $item => $value)
         <div class="vstack gap-5 p-4" id="accordion">
             <div class="card">
-                <div class="card-header d-flex justify-content-center" id="headingOne">
-                    <h5 class="mb-0 d-flex justify-content-center">
-                        <button class="btn btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne" onclick="Mudarestado('{{ $value['tipo'] }}')">
-                            <h4>{{ $value['tipo'] }}</h4>
-                        </button>
-                    </h5>
-                </div>
+                @if ($value['tipo'] == "Dança")
+                    <div class="card-header d-flex justify-content-center" id="headingOne" style="background-color: #fccb96;">
+                        <h5 class="mb-0 d-flex justify-content-center">
+                            <button class="btn btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne" onclick="Mudarestado('{{ $value['tipo'] }}')">
+                                <h4>{{ $value['tipo'] }}</h4>
+                            </button>
+                        </h5>
+                    </div>                    
+                @endif
+                @if ($value['tipo'] == "Canto")
+                    <div class="card-header d-flex justify-content-center" id="headingOne" style="background-color: #96a7fc;>
+                        <h5 class="mb-0 d-flex justify-content-center">
+                            <button class="btn btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne" onclick="Mudarestado('{{ $value['tipo'] }}')">
+                                <h4>{{ $value['tipo'] }}</h4>
+                            </button>
+                        </h5>
+                    </div>                    
+                @endif
+                @if ($value['tipo'] == "Performance Livre")
+                    <div class="card-header d-flex justify-content-center" id="headingOne" style="background-color: #99fc96;>
+                        <h5 class="mb-0 d-flex justify-content-center">
+                            <button class="btn btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne" onclick="Mudarestado('{{ $value['tipo'] }}')">
+                                <h4>{{ $value['tipo'] }}</h4>
+                            </button>
+                        </h5>
+                    </div>                    
+                @endif
 
                 <div id="{{ $value['tipo'] }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                         <form action="{{route('enviaNota')}}" method="post" id="{{ $value['tipo'] }}">
                             <table>
                                 <tr>
-                                    <th>Apresentação</th>
-                                    <th>{{ $value['categoria1'] }}</th>
-                                    <th>{{ $value['categoria2'] }}</th>
-                                    <th>{{ $value['categoria3'] }}</th>
-                                    <th>{{ $value['categoria4'] }}</th>
-                                    <th>{{ $value['categoria5'] }}</th>
-                                    <th>Total</th>
+                                    <th class="bd h4 pb-4">Apresentações</th>
                                 </tr>
                                 @foreach ($apresentacoes as $item => $apresentacao)
+                                <tr>
+                                    @if ($value['id'] == $apresentacao['categoria_id'])
                                     <tr>
-                                        @if ($value['id'] == $apresentacao['categoria_id'])
+                                        <th>Apresentação {{ $apresentacao['numero'] }}</th>
+                                    </tr>                                
                                     <tr>
-                                        <td>Apresentação {{ $apresentacao['numero'] }}</td>
-                                        <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="categoria1"
-                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
-                                        </td> 
-                                        <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="categoria2"
-                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
+                                        <td class="">
+                                            <div class="row g-3 p-2"> 
+                                                <!--criterio1-->
+                                                <div class="col align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="exampleInputEmail1" class="form-label h7">{{ $value['categoria1'] }}</label>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <input type="number" OnInput="SumNotes(this.id)" class="form-control " required
+                                                        name="categoria1"
+                                                        size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
+                                                    </div>                                                
+                                                </div>
+                                                <!--criterio2-->
+                                                <div class="col align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="exampleInputEmail1" class="form-label h7">{{ $value['categoria2'] }}</label>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <input type="number" OnInput="SumNotes(this.id)" class="form-control " required
+                                                        name="categoria1"
+                                                        size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
+                                                    </div>                                                
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="categoria3"
-                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
-                                        </td>
-                                        <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="categoria4"
-                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
-                                        </td>
-                                        <td><input type="number" OnInput="SumNotes(this.id)" required
-                                                name="categoria5"
-                                                size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
-                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>
-                                            <p><span id="{{$apresentacao['numero']}}sum">0</span></p>
+                                            <div class="row g-2 p-2"> 
+                                                <!--criterio3-->
+                                                <div class="col align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="exampleInputEmail1" class="form-label h7">{{ $value['categoria3'] }}</label>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <input type="number" OnInput="SumNotes(this.id)" class="form-control " required
+                                                        name="categoria1"
+                                                        size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
+                                                    </div>                                                
+                                                </div>
+                                                <!--criterio4-->
+                                                <div class="col align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="exampleInputEmail1" class="form-label h7">{{ $value['categoria4'] }}</label>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <input type="number" OnInput="SumNotes(this.id)" class="form-control " required
+                                                        name="categoria1"
+                                                        size="3" class="{{$apresentacao['id']}}" id="{{$apresentacao['id']}}">
+                                                    </div>                                                
+                                                </div>
+                                            </div>
                                         </td>
-                                        
                                     </tr>
                                 @endif
                                 </tr>
