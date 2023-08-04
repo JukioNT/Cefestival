@@ -9,7 +9,7 @@
         </div>
         <div class="p-2 ms-auto">
             <div class="nav nav-pills">
-                <a href="#" class="nav-link active p-2" aria-current="page">
+                <a href="/home/notasListar" class="nav-link active p-2" aria-current="page">
                     Resultados
                 </a>
             </div>

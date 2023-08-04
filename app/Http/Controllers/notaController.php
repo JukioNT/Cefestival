@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\nota;
+use App\Models\categorias;
+use App\Models\apresentacoes;
+use Illuminate\Support\Facades\DB;
 
 class notaController extends Controller
 {
@@ -14,8 +17,15 @@ class notaController extends Controller
      */
     public function index()
     {
-        $notas = nota::all();
-        return view('sistema.index', compact('notas'));
+        $notas = nota::orderBy('nota', 'desc')->get();
+        $apresentacoes = apresentacoes::all();
+        $categorias = categorias::all();
+        $table = $resultados = DB::table('apresentacoes')
+            ->join('notas', 'apresentacoes.id', '=', 'notas.apresentacao_id')
+            ->select('apresentacoes.numero', 'notas.nota', 'apresentacoes.categoria_id')
+            ->orderBy('notas.nota', 'desc')
+            ->get();
+        return view('sistema.listaNotas', compact('notas', 'apresentacoes', 'categorias', 'table'));
     }
 
     /**
