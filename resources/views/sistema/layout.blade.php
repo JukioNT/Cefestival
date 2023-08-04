@@ -10,6 +10,8 @@
 <body>
     @component('sistema.navbar')
     @endcomponent
+    @component('sistema.message')
+    @endcomponent
 
     @yield('body')
     @yield('script')

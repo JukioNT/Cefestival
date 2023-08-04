@@ -19,7 +19,7 @@
                     </div>                    
                 @endif
                 @if ($value['tipo'] == "Canto")
-                    <div class="card-header d-flex justify-content-center" id="headingOne" style="background-color: #96a7fc;>
+                    <div class="card-header d-flex justify-content-center" id="headingOne" style="background-color: #96a7fc;">
                         <h5 class="mb-0 d-flex justify-content-center">
                             <button class="btn btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne"
                                 aria-expanded="true" aria-controls="collapseOne" onclick="Mudarestado('{{ $value['tipo'] }}')">
@@ -29,7 +29,7 @@
                     </div>                    
                 @endif
                 @if ($value['tipo'] == "Performance Livre")
-                    <div class="card-header d-flex justify-content-center" id="headingOne" style="background-color: #99fc96;>
+                    <div class="card-header d-flex justify-content-center" id="headingOne" style="background-color: #99fc96;">
                         <h5 class="mb-0 d-flex justify-content-center">
                             <button class="btn btn-toggle" data-toggle-bs="collapse" data-element="#collapseOne"
                                 aria-expanded="true" aria-controls="collapseOne" onclick="Mudarestado('{{ $value['tipo'] }}')">
@@ -123,9 +123,11 @@
             </div>
         </div>
     @endforeach
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="enviarForms()">
-        Enviar Notas
-    </button>
+    <div class="container" style="display: flex;justify-content: center;">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="enviarForms()">
+            Enviar Notas
+        </button>
+    </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -139,7 +141,7 @@
                     <input type="hidden" id="hidden" name="notas">
                     <input type="hidden" id="userid" value="{{$user->id}}">
                     <!--Boatão enviar-->
-                    <input type="submit" value="Enviar Voto">
+                    <input type="submit" value="Enviar Voto" class="btn btn-warning" >
                 </form>
             </div>
             <div class="modal-footer">

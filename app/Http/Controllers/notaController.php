@@ -56,8 +56,7 @@ class notaController extends Controller
             $data->nota = $item[0];
             $data->save();
         }
-
-        return view('sistema.enviaNotas', compact('dados'));
+        return redirect('/home/notasListar')->with('success', 'Nota cadastrada com sucesso');
     }
 
     /**
